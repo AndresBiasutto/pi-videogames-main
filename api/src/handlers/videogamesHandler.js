@@ -1,4 +1,4 @@
-const {postNewGame}=require("../controllers/videogameControllers")
+const {postNewGame, getVideogame}=require("../controllers/videogameControllers")
 
 
 const getVideogameHandler = (req, res) => {
@@ -10,9 +10,18 @@ const getVideogameHandler = (req, res) => {
     }
     res.send("estoy en videogame")
 }
-const getVideogameByIdHandler = (req, res) => {
+const getVideogameByIdHandler = async(req, res) => {
     const { idVideogame } = req.params;
-    res.send(`enviar el detalle solicitado por el id: ${idVideogame}`)
+    const source= isNaN(idVideogame)? "bdd":"api";
+    try {
+        const videogame=  await getVideogame(idVideogame, source);
+        console.log(videogame)
+        res.status(200).json(videogame)
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+    
+    
 }
 const postVideogameHandler = async (req, res) => {
     try {
