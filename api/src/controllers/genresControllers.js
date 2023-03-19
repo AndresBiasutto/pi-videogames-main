@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const getGenres= async()=>{
     const genresDb = await Genres.findAll();
-    if (genresDb.length) return res.json(genresDb)
+    if (genresDb.length) return genresDb
     const response = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
     const genres = response.data.results;
     genres.forEach(async g => {
