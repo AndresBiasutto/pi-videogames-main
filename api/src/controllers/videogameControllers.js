@@ -50,10 +50,21 @@ const getGameByName = async (name) => {
     return [...resultado, ...gamesByNameDatabase];
 }
 const getAllGames = async () => {
-    const allGamesDataBase = await Videogame.findAll()
-    const allGamesApiSinFiltro = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)).data
-
+    const allGamesDataBase = await Videogame.findAll({
+        include: {
+            model: Genres,
+            attributes: ["id", "name"],
+        },
+    })
+    const allGamesApiSinFiltro = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)).data
+    const allGamesApiSinFiltro1 = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40&page=1`)).data
+    const allGamesApiSinFiltro2 = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40&page=2`)).data
+    const allGamesApiSinFiltro3 = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40&page=3`)).data
+    
     const filtrado = await filtradorDeDatos(allGamesApiSinFiltro)
-    return [...allGamesDataBase, ...filtrado];
+    const filtrado1 = await filtradorDeDatos(allGamesApiSinFiltro1)
+    const filtrado2 = await filtradorDeDatos(allGamesApiSinFiltro2)
+    const filtrado3 = await filtradorDeDatos(allGamesApiSinFiltro3)
+    return [...allGamesDataBase, ...filtrado, ...filtrado1, ...filtrado2, ...filtrado3];
 }
 module.exports = { postNewGame, getGameById, getGameByName, getAllGames };
