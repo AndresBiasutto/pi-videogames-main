@@ -11,7 +11,7 @@ const filtradorDeDatos = async(games)=>{
          }
         })
  }
-const filtradosLosPrimeros15= (games)=>{
-    return games.slice(0, 15)
+const filtradoPrimero= (games)=>{
+    return games.slice(0, 1)
 }
- module.exports= {filtradorDeDatos, filtradosLosPrimeros15};
+ module.exports= {filtradorDeDatos, filtradoPrimero};
