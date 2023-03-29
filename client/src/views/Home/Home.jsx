@@ -20,12 +20,7 @@ const Home = (props) => {
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-    const [search, setSearch] = useState('');
 
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
-        console.log(event.target.value)
-    }
     useEffect(() => {
         dispatch(getVideogames())
     }, [dispatch])
@@ -38,24 +33,17 @@ const Home = (props) => {
             <GenreFilter />
             <OriginFilter />
             <RankingFilter />
-            <input type="text" placeholder="Buscar juego" value={search} onChange={handleSearch} />
-            <div className={style.cardsContainer}>
-                {currentVideogames.filter((game) => game.name.toLowerCase().includes(search.toLowerCase())).map((game) => <Card
-                    image={game.image}
-                    name={game.name}
-                    rating={game.rating}
-                />
-                )}
-                </div>
+            
             <div className={style.cardsContainer}>
                 {currentVideogames.map((game) => <Card
                     image={game.image}
                     name={game.name}
                     rating={game.rating}
+                    genre={game.genres && game.genres.length > 0 ? game.genres.map((genre) => genre.name).join(", ") : 'genre not found'}
                 />
                 )}
 
-            </div>
+            </div> 
             <Paginado
                 videogamesPerPage={videogamesPerPage}
                 videogames={videogames.length}

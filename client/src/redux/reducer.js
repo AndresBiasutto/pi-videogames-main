@@ -4,7 +4,8 @@ const initialState = {
     videogames: [],
     videogame: "",
     genres: [],
-    rating: 0
+    rating: 0,
+    gameDetails: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,11 +48,15 @@ const rootReducer = (state = initialState, action) => {
                     return b.rating - a.rating;
                 }
             });
-
             return {
                 ...state,
                 videogames: sortedVideogames,
             };
+            case 'SELECT_GAME':
+                return {
+                    ...state,
+                    gameDetails: action.payload
+                }
         default:
             return {
                 ...state

@@ -7,11 +7,12 @@ const filtradorDeDatos = async(games)=>{
              platforms:game.platforms[0].platform.name,
              image:game.background_image,
              releaseDate:game.released,
-             rating:game.rating
+             rating:game.rating,
+             genres:game.genres
          }
         })
  }
-const filtradoPrimero= (games)=>{
-    return games.slice(0, 1)
+const filtradosLosPrimeros15= (games)=>{
+    return games.slice(0, 15)
 }
- module.exports= {filtradorDeDatos, filtradoPrimero};
+ module.exports= {filtradorDeDatos, filtradosLosPrimeros15};

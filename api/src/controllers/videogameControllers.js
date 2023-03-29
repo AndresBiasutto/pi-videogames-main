@@ -1,7 +1,7 @@
 const { Videogame, Genres } = require("../db")
 const axios = require("axios")
 const { API_KEY } = process.env;
-const { filtradorDeDatos, filtradoPrimero } = require("../helpers/videogameHelpers")
+const { filtradorDeDatos, filtradosLosPrimeros15 } = require("../helpers/videogameHelpers")
 
 const postNewGame = async (name, description, platforms, image, releaseDate, rating, genre) => {
     const newGame = await Videogame.create({ name, description, platforms, image, releaseDate, rating, genre })
@@ -45,7 +45,7 @@ const getGameById = async (idVideogame, source) => {
 const getGameByName = async (name) => {
     const GamesByNameApi = (await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)).data
     const gamesByNameFiltrados = await filtradorDeDatos(GamesByNameApi)
-    const resultado = await filtradoPrimero(gamesByNameFiltrados)
+    const resultado = await filtradosLosPrimeros15(gamesByNameFiltrados)
     const gamesByNameDatabase = await Videogame.findAll({ where: { name: name } })
     return [...resultado, ...gamesByNameDatabase];
 }

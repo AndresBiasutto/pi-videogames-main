@@ -14,7 +14,7 @@ const RankingFilter = () => {
 
   return (
     <div>
-      <label htmlFor="ranking-select">Ordenar por ranking:</label>
+      <label htmlFor="ranking-select">Ordenar por rating:</label>
       <select id="ranking-select" onChange={handleRankFilter}>
         <option value="default">Por defecto</option>
         <option value="desc">De mayor a menor</option>

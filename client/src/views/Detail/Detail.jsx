@@ -1,25 +1,24 @@
 
-const Detail = (props) => {
-     const game={
-        name:"obliviontes",
-        image:"https://pbs.twimg.com/media/FjFAIZkXkAIlwqT?format=jpg&name=900x900",
-        platforms:"nintento",
-        release_date: "23/4/2043",
-        rating: 4,
-        genre:  "asion!"
-        }
+import { useSelector } from "react-redux";
+
+const Detail = () => {
+    const videogame = useSelector((state) => state.selectedVideogame);
+
+    if (!videogame) {
+        return <div>Cargando...</div>;
+    }
+
     return (
-       
         <div>
-            <h1>{game.name}</h1>
-            <img src={game.image} alt={game.name} />
-            <p>Plataformas: {game.platforms}</p>
-            <p>{game.description}</p>
-            <p>Fecha de lanzamiento: {game.release_date}</p>
-            <p>Rating: {game.rating}</p>
-            <p>Géneros: {game.genre}</p>
+            <h1>{videogame.name}</h1>
+            <img src={videogame.image} alt={videogame.name} />
+            <p>Rating: {videogame.rating}</p>
+            {videogame.genres && videogame.genres.length > 0 && (
+                <p>Géneros: {videogame.genres.map((genre) => genre.name).join(", ")}</p>
+            )}
         </div>
-    )
-}
+    );
+};
+
 
 export default Detail;

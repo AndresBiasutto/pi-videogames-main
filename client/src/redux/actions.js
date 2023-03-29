@@ -6,6 +6,7 @@ export const GET_VIDEOGAME_BY_NAME= "GET_VIDEOGAME_BY_NAME";
 export const GET_GENRES= "GET_GENRES";
 export const FILTER_BY_RANK= "FILTER_BY_RANK";
 export const SORT_VIDEOGAMES_BY_RANK = "SORT_VIDEOGAMES_BY_RANK";
+export const SELECT_GAME = "SELECT_GAME";
 
 export function getVideogames() {
     return async function (dispatch) {
@@ -38,3 +39,9 @@ export function getGenres(){
 export const sortVideogamesByRank = (order) => (dispatch) => {
     dispatch({ type: SORT_VIDEOGAMES_BY_RANK, payload: order });
   };
+  export const selectGame = (game) => {
+    return {
+        type: SELECT_GAME,
+        payload: game
+    }
+}

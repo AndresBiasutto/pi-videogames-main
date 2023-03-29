@@ -1,3 +1,5 @@
+import styles from "./Paginado.module.css"
+
 const Paginado = ({ videogamesPerPage, videogames, paginado }) => {
     const pageNumbers = [];
   
@@ -7,9 +9,9 @@ const Paginado = ({ videogamesPerPage, videogames, paginado }) => {
   
     return (
       <nav>
-        <ul>
+        <ul className={styles.container}>
           {pageNumbers.map((number) => (
-            <li key={number}>
+            <li key={number} className={styles.li}>
               <button onClick={() => paginado(number)}>
                 {number}
               </button>

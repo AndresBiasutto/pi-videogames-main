@@ -5,6 +5,7 @@ import Landing from "./views/Landing/Landing"
 import Detail from "./views/Detail/Detail"
 import NavBar from './components/NavBar/NavBar';
 import CreateGame from './views/CreateGame/CreateGame';
+import SearchBar from './components/SearchBar/SearchBar';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" render={() => <Home />} />
         <Route path="/creategame" render={() => <CreateGame />} />
         <Route path="/detail" render={() => <Detail />} />
+        <Route path="/searchbar" render={() => <SearchBar />} />
       </div>
 
 
